@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/awdriggs/mathtasktic#readme",
   "dependencies": {
+    "backbone": "^1.2.2",
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "morgan": "^1.6.1"
