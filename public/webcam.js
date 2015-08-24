@@ -4,7 +4,7 @@ $(window).load(function() {
     $('#video_wrapper').on('click', '#confirm', confirm);
     $('#video_wrapper').on('click', '#reload', reload);
     $('#video_wrapper').on('click', '#exit', exit);
-    
+
     $('#snap').click(snap); //for taking the picture, turn to timer or opencv logic later
 
     $("player").click(function() {
@@ -37,14 +37,26 @@ $(window).load(function() {
     $('#capture_nav').hide();
 });
 
-
-
 //cofirm capture
 //save photo and send to server? need to figure this out for sure...
 var confirm = function() {
-        console.log('confirm capture');
+    console.log('confirm capture');
+    var canvas = document.getElementById("canvas");
+    var captured = canvas.toDataURL();
+    
+    var postData = {
+        user: 'fake_username',
+        image: captured
     }
     
+    $.post('/submit', postData,
+    function(data)
+    {
+          //right now this is just html data, we can do something else later
+          console.log(data);
+    });   
+}
+
 //retake capture 
 var reload = function() {
     console.log('reload viewer');
