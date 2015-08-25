@@ -14,8 +14,6 @@ var ejs           = require('ejs');
 
 app.set('view engine', 'ejs'); // set up ejs for templating
 
-
-
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
