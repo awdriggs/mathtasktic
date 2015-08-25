@@ -9,7 +9,6 @@ $(window).load(function() {
     
 })
 
-
 var signup = function(){
 	console.log('signup pressy');
 	$("#user_form").attr("action", "/signup");
@@ -22,8 +21,7 @@ var signup = function(){
 	
 	//build the rest of the signup form
 	var username = $('<div>').attr('class', 'form-group').attr('class', 'signup_input');
-	username.append($('<label>').html("Username"))
-	username.append($('<input>').attr('type', 'username').attr('class', 'form-control').attr('name', 'username'))
+	username.append($('<input>').attr('type', 'email').attr('class', 'form-control').attr('name', 'email').attr('placeholder', 'email'))
 	username.insertBefore($('#login'))
 }
 
