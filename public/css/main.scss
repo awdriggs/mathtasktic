@@ -1,0 +1,29 @@
+$navy: #2E296C; 
+
+body{
+	background-color: $navy;
+}
+
+#wrapper{
+	
+	/*min-width: 400px;*/
+	width: 1280px;
+	/*background-color: white;*/
+	height: 720px;
+	/*overflow: hidden; removes the bottom portion of the video stream*/
+	margin: 1rem auto;
+}
+
+/*
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+    vertical-align: middle;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+*/

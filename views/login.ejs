@@ -1,0 +1,26 @@
+<!-- views/login.ejs -->
+
+
+    
+
+    <!-- show any messages that come back with authentication -->
+    <% if (message.length > 0) { %>
+        <div class="alert"><%= message %></div>
+    <% } %>
+
+    <!-- LOGIN FORM -->
+   
+        <div class="form">
+            <label>Email</label>
+            <input type="text" class="form-control" name="email">
+        </div>
+        <div class="form">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+
+        <button class="btn" id="login">Login</button>
+        <button class="btn" id="signup">Signup</button>
+
+        <button class="btn" id="create">Create</button>
+        <button class="btn" id="cancel">Cancel</button>
