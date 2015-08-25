@@ -9,10 +9,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    // =====================================
-    // LOGIN ===============================
-    // =====================================
-    // show the login form
+// LOGIN ////////////////////////////////////////////////////////////////////////////
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
@@ -33,16 +30,16 @@ module.exports = function(app, passport) {
         failureFlash : true // allow flash messages
     }));
 
-    // task
-    app.get('/', isLoggedIn, function(req, res) {
-        res.render('task.ejs', {
-            user : req.user // get the user out of session and pass to template
-        });
-    });
 
-    // =====================================
-    // LOGOUT ==============================
-    // =====================================
+    // // task 
+    // // uncomment if you end up 
+    // app.get('/task', isLoggedIn, function(req, res) {
+    //     res.render('task.ejs', {
+    //         user : req.user // get the user out of session and pass to template
+    //     });
+    // });
+
+// LOGOUT /////////////////////////////////////////////////////////////////////////
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/login');
