@@ -11,9 +11,8 @@ App.Views.LoginView = Backbone.View.extend({
 	},
 
 	render: function () {
-		var ejs           = require('ejs');
-
-		var html = ejs({url:'/views/login'})
+		
+		var html = new EJS({url:'/javascript/backbone/views/login.ejs'})
 
 		this.$el.html(html);
 	}
