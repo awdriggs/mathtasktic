@@ -4,7 +4,7 @@ module.exports.controller = function(app, passport) {
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', isLoggedIn, function(req, res) {
-        res.render('tasks.ejs', {
+        res.render('tasks', {
             user: req.user // get the user out of session and pass to template
         });
     });
@@ -13,7 +13,8 @@ module.exports.controller = function(app, passport) {
     app.get('/login', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('login.ejs', {
+        res.render('login', {
+            title: 'Login', layout: 'login',
             message: req.flash('message')
         });
     });
@@ -34,7 +35,7 @@ module.exports.controller = function(app, passport) {
 
 
     // // task 
-    // // uncomment if you end up 
+    // // uncomment if you end up creating a mainpage
     // app.get('/task', isLoggedIn, function(req, res) {
     //     res.render('task.ejs', {
     //         user : req.user // get the user out of session and pass to template
@@ -47,19 +48,7 @@ module.exports.controller = function(app, passport) {
         res.redirect('/login');
     });
 
-    // CREATE A TASK ////////
-    // future, this needs to be locked down to only teachers
-    app.get('/create', function(req, res) {
-
-        // render the page and pass in any flash data if it exists
-        res.render('makeTask.ejs');
-    });
-
-    app.post('/create', function(req, res) {
-        //do the business of adding to mongo
-        res.send(req.body);
-        //res.redirect('/');
-    });
+  
 };
 
 // route middleware to make sure a user is logged in
