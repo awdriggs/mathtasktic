@@ -1,0 +1,30 @@
+<!-- views/login.ejs -->
+<!doctype html>
+<html>
+<head>
+    <title>Mathtasktic</title>
+    <link rel="stylesheet" href="./css/main.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+<body>
+<div id="wrapper">
+
+    <!-- TASK FORM -->
+    <form id="task_form" action="/create" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" name="title" placeholder="title">
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" name="objective" placeholder="objective">
+        </div>
+
+        <div class="form-group">
+            <textarea rows="4" cols="50" class="form-control" name="description" placeholder="description"></textarea>
+        </div>
+        
+        <button id="create" type="submit" class="btn btn-warning btn-lg">Create</button>
+    </form>
+</div>
+</body>
+</html>
