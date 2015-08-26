@@ -36,14 +36,16 @@ module.exports.controller = function(app, passport) {
     app.get('/submit/:id', function(req, res) {
 
         //send the webcam template!
-       
+       console.log(req.params.id);
         res.render('webcam', {
-            title: 'Webcam', layout: 'capture'
+            title: 'Webcam', 
+            layout: 'capture',
+            taskid: req.params.id
         });
     })
 
     app.post('/submit/:id', function(req, res) {
-        req.user.local.id
+        
         var dataUrl = req.body.image
         var dataString = dataUrl.split(",")[1];
         var buffer = new Buffer(dataString, 'base64');
