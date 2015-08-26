@@ -13,7 +13,7 @@ var configDB      = require('./config/database.js');
 var ejs           = require('ejs');
 
 app.set('view engine', 'ejs'); // set up ejs for templating
-
+app.set('views', __dirname + '/app/views');
 // configuration ===============================================================
 mongoose.connect(configDB.url); // connect to our database
 
@@ -29,7 +29,14 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 
-require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+fs.readdirSync('./app/controllers').forEach(function(file) {
+    if (file.substr(-3) == '.js') {
+        route = require('./app/controllers/' + file);
+        route.controller(app, passport);
+    }
+});
+
+// require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 app.set('port', (process.env.PORT || 3000));
 
