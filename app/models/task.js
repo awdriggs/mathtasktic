@@ -4,13 +4,15 @@ var mongoose = require('mongoose');
 
 //define the schema for the response schema, it is a sub-dcoument of task
 var responseSchema = mongoose.Schema({
-	student: String, //make this a ref?
+	student: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //make this a ref?
 	image: String, //this should be a url
-	feedback: String
+	feedback: String,
+	timestamp: { type: Date, default: Date.now }
 })
 
 // define the schema for the task model
 var taskSchema = mongoose.Schema({
+	timestamp: { type: Date, default: Date.now },
 	title: String,
 	objective: String,
 	description: String,

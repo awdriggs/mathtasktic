@@ -36,9 +36,9 @@ module.exports.controller = function(app, passport) {
     app.get('/submit/:id', function(req, res) {
 
         //send the webcam template!
-       console.log(req.params.id);
+        console.log(req.params.id);
         res.render('webcam', {
-            title: 'Webcam', 
+            title: 'Webcam',
             layout: 'capture',
             taskid: req.params.id
         });
@@ -46,18 +46,55 @@ module.exports.controller = function(app, passport) {
 
     app.post('/submit/:id', function(req, res) {
         
-        var dataUrl = req.body.image
-        var dataString = dataUrl.split(",")[1];
-        var buffer = new Buffer(dataString, 'base64');
-        var extension = dataUrl.match(/\/(.*)\;/)[1];
+        //I think all of this needs to happen after the save!
+        //because i want to include the user id into the feedback.
+        //get the task with the object id of object id
+        var current = Task.findById(req.params.id).exec(function(err, task) {
+                console.log('id', task._id)
+                task.responses.push({
+                    student: req.user._id //this will be the current user.
+                })
 
-        var fullFileName = 'testing' + "." + extension;
         
-        console.log(buffer);
-        //fs.writeFileSync(fullFileName, buffer, "binary");
-        //write to s3
+                //populate the student's info into the document
+                task.save(function(err, task) {
+                    Task.findOne(task).populate('responses.student').exec(function(err, item) {
+                        res.json(item)
+                    })
+                })
 
-        res.redirect('/');
+            })
+
+        // 
+        // item.save(function(err, item) {
+        //     Item.findOne(item).populate('comments.created_by').exec(function(err, item) {
+        //         res.json({
+        //             status: 'success',
+        //             message: "You have commented on this item",
+        //             comment: item.comments.id(comment._id)
+        //         });
+        //     });
+        // });
+            //get the user from the db with the user id
+
+        //set the response to be a response sub doc
+
+        //populate the user?
+
+
+        // //saving bs
+        // var dataUrl = req.body.image
+        // var dataString = dataUrl.split(",")[1];
+        // var buffer = new Buffer(dataString, 'base64');
+        // var extension = dataUrl.match(/\/(.*)\;/)[1];
+
+        // var fullFileName = 'testing' + "." + extension;
+
+        // console.log(buffer);
+        // //fs.writeFileSync(fullFileName, buffer, "binary");
+        // //write to s3
+
+        // res.redirect('/');
         //res.send('post submit hit')
     })
 
