@@ -1,7 +1,7 @@
 $(window).load(function() {
     //dedictated button events
     console.log('webcam js loaded');
-    $('#video_wrapper').on('click', '#confirm', confirm);
+    
     $('#video_wrapper').on('click', '#reload', reload);
     $('#video_wrapper').on('click', '#exit', exit);
 
@@ -32,31 +32,33 @@ $(window).load(function() {
         var video = document.querySelector("#player");
         video.src = window.URL.createObjectURL(stream);
     }
+    //.stop() on the stream will stop it!
 
     $('#canvas').hide(); //hide the canvas to start
-    $('#capture_nav').hide();
+    $('#capture').hide();
 });
 
 //cofirm capture
+// switched from ajax to form submission
 //save photo and send to server? need to figure this out for sure...
-var confirm = function() {
-    console.log('confirm capture');
-    var canvas = document.getElementById("canvas");
-    var captured = canvas.toDataURL();
-    var pathname = window.location.pathname;
+// var confirm = function() {
+//     console.log('confirm capture');
+//     var canvas = document.getElementById("canvas");
+//     var captured = canvas.toDataURL();
+//     var pathname = window.location.pathname;
 
-    var postData = {
-        user: 'fake_username',
-        image: captured
-    }
+//     var postData = {
+//         user: 'fake_username',
+//         image: captured
+//     }
     
-    $.post(pathname, postData,
-    function(data)
-    {
-          //right now this is just html data, we can do something else later
-          console.log(data);
-    });   
-}
+//     $.post(pathname, postData,
+//     function(data)
+//     {
+//           //right now this is just html data, we can do something else later
+//           console.log(data);
+//     });   
+// }
 
 //retake capture 
 var reload = function() {
@@ -69,6 +71,7 @@ var reload = function() {
 
 var exit = function() {
     console.log('exit viewer');
+    parent.history.back();
 }
 
 //capture portion of the current webcam image.
@@ -77,10 +80,13 @@ var snap = function() {
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
 
+    var captured = canvas.toDataURL();
+    $('#image').val(captured);
+
     console.log('snap')
 
     $('#feed').hide();
     $('#canvas').show();
-    $('#capture_nav').show();
+    $('#capture').show();
     context.drawImage(player, 150, 150, 350, 200, 0, 0, 700, 400);
 }
