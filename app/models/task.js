@@ -14,8 +14,10 @@ var taskSchema = mongoose.Schema({
 	title: String,
 	objective: String,
 	description: String,
-	responses: [responseSchema]
+	responses: [responseSchema],
+	solution: String //this should be an url
 });
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('Task', taskSchema);
+

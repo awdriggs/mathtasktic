@@ -1,12 +1,22 @@
+var Task = require('../models/task');
+
 module.exports.controller = function(app, passport) {
 
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
     app.get('/', isLoggedIn, function(req, res) {
-        res.render('tasks', {
-            user: req.user // get the user out of session and pass to template
-        });
+        //find all the tasks
+        
+        Task.find().exec(function(err, tasks){
+            res.render('tasks', {
+                user: req.user,
+                data: tasks
+            })
+        })
+        // res.render('tasks', {
+        //     user: req.user // get the user out of session and pass to template
+        // });
     });
 
     // LOGIN ////////////////////////////////////////////////////////////////////////////
