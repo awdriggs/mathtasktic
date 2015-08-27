@@ -56,58 +56,50 @@ module.exports.controller = function(app, passport) {
         });
     })
 
-    app.get('/submit/:id', function(req, res) {
+    app.get('/submit/:id/:step', function(req, res) {
 
         //send the webcam template!
         console.log(req.params.id);
         res.render('webcam', {
             title: 'Webcam',
             layout: 'capture',
-            taskid: req.params.id
+            taskid: req.params.id,
+            stepid: req.params.step
         });
+
     })
 
     //pass step number too?
-    app.post('/submit/:id', function(req, res) {
+    app.post('/submit/:id/:step', function(req, res) {
         
         //I think all of this needs to happen after the save!
         //because i want to include the user id into the feedback.
         //get the task with the object id of object id
         var current = Task.findById(req.params.id).exec(function(err, task) {
-                console.log('id', task._id)
-                //add in the step here, grab the index of the step in the array?
-                //something like. var currentIndex = responses.indexOf(req.params.step)
-                //task.steps[currentIndex].push({'yadayada'})
-                task.responses.push({
+                
+                var step = task.steps.id(req.params.step); //this grabs the correct step that I want!
+                
+                
+               //push the student userid to the object
+                step.responses.push({
                     student: req.user._id //this will be the current user.
                 })
 
         
                 //populate the student's info into the document
-                //need to go one level deeper to save the responses in the steps!
+                
                 task.save(function(err, task) {
-                    Task.findOne(task).populate('responses.student').exec(function(err, item) {
-                        res.json(item)
+                    Task.findOne(task).populate('steps.responses.student').exec(function(err, item) {
+                        res.json(item) // temp, need to send student to the actual solution...
                     })
                 })
 
             })
 
-        // 
-        // item.save(function(err, item) {
-        //     Item.findOne(item).populate('comments.created_by').exec(function(err, item) {
-        //         res.json({
-        //             status: 'success',
-        //             message: "You have commented on this item",
-        //             comment: item.comments.id(comment._id)
-        //         });
-        //     });
-        // });
-            //get the user from the db with the user id
+        //next steps, figure out how to save to the a cloud storage and get the images back out...
+        //figure out how to build the next student action, seeing the actual answer and getting to set get or not get
 
-        //set the response to be a response sub doc
-
-        //populate the user?
+       
 
 
         // //saving bs

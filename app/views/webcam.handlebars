@@ -7,8 +7,8 @@
   </div> <!-- end feed -->
 
   <div id="capture">
-  capture
-  <form id="capture_nav" action="/submit/{{taskid}}" method="post">
+  
+  <form id="capture_nav" action="/submit/{{taskid}}/{{stepid}}" method="post">
     <textarea name="image" id="image" style="display: none;"></textarea>
     <button type='submit' class='capture_nav_item' id='confirm'>confirm</button>
     <button type="button" class='capture_nav_item' id='reload'>reload</button>
@@ -18,7 +18,7 @@
   <canvas id="canvas" width="700" height="400" style="display: hidden"></canvas>
 
   </div>	<!-- end capture -->
-  end of wrapper
+  
 </div>  <!-- end video wrapper -->
 
 <button type="button" id='snap'>take photo</button>
