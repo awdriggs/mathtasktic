@@ -8,12 +8,11 @@
 
   <div id="capture">
   
-  <form id="capture_nav" action="/submit/{{taskid}}/{{stepid}}" method="post">
-    <textarea name="image" id="image"></textarea>
-    <button type='submit' class='capture_nav_item' id='confirm'>confirm</button>
+    <a href="/task/{{taskid}}/{{stepid}}">
+      <button type='button' class='capture_nav_item' id='confirm'>confirm</button>
+    </a>
     <button type="button" class='capture_nav_item' id='reload'>reload</button>
     <button type="button" class='capture_nav_item' id='exit'>exit</button>
-  </form><!-- end capture nav -->
 
   <canvas id="canvas" width="700" height="400" style="display: hidden"></canvas>
 

@@ -100,32 +100,32 @@ module.exports.controller = function(app, passport) {
         var id = req.params.id;
         var step = req.params.step;
 
-        // s3.addResponseImage(id, step, user, buffer, function(url) {
-        //     //I think all of this needs to happen after the save!
-        //     //because i want to include the user id into the feedback.
-        //     //get the task with the object id of object id
-        //     var current = Task.findById(req.params.id).exec(function(err, task) {
+        s3.addResponseImage(id, step, buffer, function(url) {
+            //I think all of this needs to happen after the save!
+            //because i want to include the user id into the feedback.
+            //get the task with the object id of object id
+            var current = Task.findById(req.params.id).exec(function(err, task) {
 
-        //         var step = task.steps.id(req.params.step); //this grabs the correct step that I want!
-
-
-        //         //push the student userid to the object
-        //         step.responses.push({
-        //             student: req.user._id, //this will be the current user.
-        //             imageURL: url
-        //         })
+                var step = task.steps.id(req.params.step); //this grabs the correct step that I want!
 
 
-        //         //populate the student's info into the document
+                //push the student userid to the object
+                step.responses.push({
+                    student: req.user._id, //this will be the current user.
+                    imageURL: url
+                })
 
-        //         task.save(function(err, task) {
-        //             Task.findOne(task).populate('steps.responses.student').exec(function(err, item) {
-        //                 res.json(item) // temp, need to send student to the actual solution...
-        //             })
-        //         })
+                //populate the student's info into the document
 
-        //     })
-        // })
+                task.save(function(err, task) {
+                    Task.findOne(task).populate('steps.responses.student').exec(function(err, item) {
+                        res.json(item) // temp, need to send student to the actual solution...
+                    })
+                })
+
+            })
+            
+        })
 
 
 
@@ -151,30 +151,35 @@ module.exports.controller = function(app, passport) {
         // res.redirect('/');
         //res.send('post submit hit')
 
-        s3.addStepImage(req.params.id, buffer, function(url) {
+        // s3.addStepImage(req.params.id, buffer, function(url) {
 
-            if (!url) {
-                //do some error handling????!!!!
-                console.log('s3 write error')
-            } else if (url) {
-                Task.findById(req.params.id).exec(function(err, task) {
-                    var currentStep = task.steps.push({
-                            direction: req.body.direction,
-                            imageURL: url
-                        }) //this is returning the index, not begining at 0, wierd?
+        //     if (!url) {
+        //         //do some error handling????!!!!
+        //         console.log('s3 write error')
+        //     } else if (url) {
+        //         Task.findById(req.params.id).exec(function(err, task) {
+        //             var currentStep = task.steps.push({
+        //                     direction: req.body.direction,
+        //                     imageURL: url
+        //                 }) //this is returning the index, not begining at 0, wierd?
 
-                    //save the image to s3
+        //             //save the image to s3
 
-                    //on callback, save the img url to collection
-                    //then send back the json
-                    task.save(function(err, data) {
-                        res.json(data.steps[currentStep - 1]); //returning an object of whatever is in the current step!
-                    })
-                });
-            }
-        })
+        //             //on callback, save the img url to collection
+        //             //then send back the json
+        //             task.save(function(err, data) {
+        //                 res.json(data.steps[currentStep - 1]); //returning an object of whatever is in the current step!
+        //             })
+        //         });
+        //     }
+        // })
     
     })
+    
+
+    app.get('/task/:id/:step', function(req, res) {
+        res.send('answer')
+    });
 
     app.get('/awstest', function(req, res) {
         s3.test('to whom?', function(m) {

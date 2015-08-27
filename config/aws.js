@@ -40,11 +40,14 @@ module.exports = {
             special: false
         });
 
-        var url='https://s3.amazonaws.com/mathtasktic/'+ taskID + '/' + slug;
+        var file = slug + '.png'
+        
+
+        var url='https://s3.amazonaws.com/mathtasktic/'+ taskID + '/' + file;
 
         var params = {
             Bucket: bucketFolder,
-            Key: slug+'.png',
+            Key: file,
             Body: buffer,
             ContentEncoding: 'base64',
             ContentType: 'image/png'
@@ -62,7 +65,7 @@ module.exports = {
         });
     },
 
-    addResponseImage: function(taskID, stepID, user, buffer, cb){
+    addResponseImage: function(taskID, stepID, buffer, cb){
         var s3 = new AWS.S3();
         bucketFolder = 'mathtasktic/'+ taskID + '/' + stepID;
 
@@ -74,25 +77,26 @@ module.exports = {
             letters: true,
             special: false
         });
+        
+        var file = slug + '.png'
+        var url='https://s3.amazonaws.com/mathtasktic/'+ taskID + '/'  + stepID + '/' + file;
 
-          var url='https://s3.amazonaws.com/mathtasktic/'+ taskID + '/'  + stepID + '/' + slug;
 
-
-        var image = {
+        var params = {
             Bucket: bucketFolder,
-            Key: slug + '.png',
+            Key: file,
             Body: buffer,
             ContentEncoding: 'base64',
             ContentType: 'image/png'
         };
-        
-        console.log('buffer from params: ' + image.Buffer)
 
-        s3.putObject(image, function(err, data) {
+         s3.putObject(params, function(err, data) {
             if (err) {
+                console.log(err)
                 cb(false)
             } else {
-                console.log('save successful')
+                console.log("save successful")
+                console.log(data)
                 cb(url)
             }
         });
