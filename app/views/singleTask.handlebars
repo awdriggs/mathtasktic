@@ -1,3 +1,6 @@
-{{data.title}}
+<h2>{{data.title}}</h2>
 {{data._id}}
-<a href='/submit/{{data._id}}'>submit</a>
+
+{{#each data.steps}}
+	<p> {{direction}} <a href='/submit/{{../data._id}}/{{_id}}'>submit</a></p>
+{{/each}}

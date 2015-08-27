@@ -10,14 +10,22 @@ var responseSchema = mongoose.Schema({
 	timestamp: { type: Date, default: Date.now }
 })
 
+var stepSchema = mongoose.Schema({
+	direction: String,
+	responses: [responseSchema]
+
+})
+
 // define the schema for the task model
 var taskSchema = mongoose.Schema({
 	timestamp: { type: Date, default: Date.now },
 	title: String,
 	objective: String,
 	description: String,
-	responses: [responseSchema],
-	solution: String //this should be an url
+	steps: [stepSchema],
+	// responses: [responseSchema],
+	solution: String, //this should be an url
+	active: { type: Boolean, default: false }
 });
 
 // create the model for users and expose it to our app
