@@ -1,6 +1,8 @@
 var Task = require('../models/task');
 // var User = require('../models/user');
 
+var s3 = require('../../config/aws.js');
+
 module.exports.controller = function(app, passport) {
 
     // CREATE A TASK ////////
@@ -116,6 +118,13 @@ module.exports.controller = function(app, passport) {
 
         // res.redirect('/');
         //res.send('post submit hit')
+    })
+
+    app.get('/awstest', function(req, res){
+        s3.test('to whom?', function(m) {
+            res.send(m)    
+        })
+        
     })
 
 }
