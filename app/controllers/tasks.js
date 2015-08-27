@@ -16,7 +16,7 @@ module.exports.controller = function(app, passport) {
     app.post('/teacher/create', function(req, res) {
         //do the business of adding to mongo
         var newTask = new Task(req.body);
-        newTask.save(function(err, task ) {
+        newTask.save(function(err, task) {
             if (err) return handleError(err);
             res.redirect('/teacher/task/' + task._id) //send to the next page so teacher can add steps, aysnc happy, will fire on success
         });
@@ -25,26 +25,43 @@ module.exports.controller = function(app, passport) {
     app.get('/teacher/task/:id', function(req, res) {
         //get the task from the db, do you even need to do this?
         res.render('stepCapture', {
-            title: 'Step', layout: 'step'
+            title: 'Step',
+            layout: 'step'
         });
     });
 
     //this is going to be hit by ajax!
-    app.post('/teacher/task/:id', function(req, res){
-        //save the fucking photo, s3 betch
-        //grab the task by the id
-        Task.findById(req.params.id).exec(function(err, task) {
-            var currentStep = task.steps.push({direction: req.body.direction}) //this is returning the index, not begining at 0, wierd?
+    app.post('/teacher/task/:id', function(req, res) {
 
-            task.save(function(err, data){
-                res.json(data.steps[currentStep-1]); //returning an object of whatever is in the current step!
-            })
-        });
+        //process photo
+        var dataUrl = req.body.image
+        var dataString = dataUrl.split(",")[1];
+        var buffer = new Buffer(dataString, 'base64');
+        var extension = dataUrl.match(/\/(.*)\;/)[1];
 
+        // //write to s3
+        s3.addStepImage(req.params.id, buffer, function(url) {
 
-        //add the step to the task
-        //return the json data of the task, front end will pop it into a div.
-        //res.send(req.params.id);
+            if (!url) {
+                //do some error handling????!!!!
+                console.log('s3 write error')
+            } else if (url) {
+                Task.findById(req.params.id).exec(function(err, task) {
+                    var currentStep = task.steps.push({
+                            direction: req.body.direction,
+                            imageURL: url
+                        }) //this is returning the index, not begining at 0, wierd?
+
+                    //save the image to s3
+
+                    //on callback, save the img url to collection
+                    //then send back the json
+                    task.save(function(err, data) {
+                        res.json(data.steps[currentStep - 1]); //returning an object of whatever is in the current step!
+                    })
+                });
+            }
+        })
     });
 
     // View a single task
@@ -73,35 +90,35 @@ module.exports.controller = function(app, passport) {
 
     //pass step number too?
     app.post('/submit/:id/:step', function(req, res) {
-        
+
         //I think all of this needs to happen after the save!
         //because i want to include the user id into the feedback.
         //get the task with the object id of object id
         var current = Task.findById(req.params.id).exec(function(err, task) {
-                
-                var step = task.steps.id(req.params.step); //this grabs the correct step that I want!
-                
-                
-               //push the student userid to the object
-                step.responses.push({
-                    student: req.user._id //this will be the current user.
-                })
 
-        
-                //populate the student's info into the document
-                
-                task.save(function(err, task) {
-                    Task.findOne(task).populate('steps.responses.student').exec(function(err, item) {
-                        res.json(item) // temp, need to send student to the actual solution...
-                    })
-                })
+            var step = task.steps.id(req.params.step); //this grabs the correct step that I want!
 
+
+            //push the student userid to the object
+            step.responses.push({
+                student: req.user._id //this will be the current user.
             })
+
+
+            //populate the student's info into the document
+
+            task.save(function(err, task) {
+                Task.findOne(task).populate('steps.responses.student').exec(function(err, item) {
+                    res.json(item) // temp, need to send student to the actual solution...
+                })
+            })
+
+        })
 
         //next steps, figure out how to save to the a cloud storage and get the images back out...
         //figure out how to build the next student action, seeing the actual answer and getting to set get or not get
 
-       
+
 
 
         // //saving bs
@@ -120,11 +137,11 @@ module.exports.controller = function(app, passport) {
         //res.send('post submit hit')
     })
 
-    app.get('/awstest', function(req, res){
+    app.get('/awstest', function(req, res) {
         s3.test('to whom?', function(m) {
-            res.send(m)    
+            res.send(m)
         })
-        
+
     })
 
 }
