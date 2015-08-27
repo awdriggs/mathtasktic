@@ -12,7 +12,8 @@ var responseSchema = mongoose.Schema({
 
 var stepSchema = mongoose.Schema({
 	direction: String,
-	responses: [responseSchema]
+	responses: [responseSchema],
+	imageURL: String
 
 })
 
