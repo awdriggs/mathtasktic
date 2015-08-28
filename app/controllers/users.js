@@ -9,10 +9,19 @@ module.exports.controller = function(app, passport) {
         //find all the tasks
         
         Task.find().exec(function(err, tasks){
-            res.render('tasks', {
-                user: req.user,
-                data: tasks
-            })
+           
+            // for(var i=0; i<tasks.length; i++){
+            //     var d = new Date(tasks[i].timestamp)
+            //     var f = (d.getMonth()+1) + '.' + d.getDate() + '.' + d.getFullYear();
+            //     tasks[i].timestamp = f;     
+                
+            // }
+            //not working
+             res.render('tasks', {
+                 user: req.user,
+                 data: tasks,
+                 // dates: datesFormatted
+             })
         })
         // res.render('tasks', {
         //     user: req.user // get the user out of session and pass to template
