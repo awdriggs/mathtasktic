@@ -39,14 +39,12 @@ $(window).load(function() {
 });
 
 //cofirm capture
-//switched from ajax to form submission
-//save photo and send to server? need to figure this out for sure...
 var confirm = function() {
     console.log('confirm capture');
     var canvas = document.getElementById("canvas");
     var captured = canvas.toDataURL();
     var pathname = window.location.pathname;
-    
+
     var postData = {
         image: captured
     }
