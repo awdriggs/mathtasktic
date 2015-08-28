@@ -2,24 +2,29 @@
 <div id="video_wrapper">
 
   <div id="feed">
+    <h2 id='directions'>capture work</h2>
    <img src="/mask.png">
    <video id="player" autoplay="true"></video>
   </div> <!-- end feed -->
 
   <div id="capture">
+    <canvas id="canvas" width="700" height="400" style="display: hidden"></canvas>
   
-    <a href="/task/{{taskid}}/{{stepid}}">
-      <button type='button' class='capture_nav_item' id='confirm'>confirm</button>
-    </a>
-    <button type="button" class='capture_nav_item' id='reload'>reload</button>
-    <button type="button" class='capture_nav_item' id='exit'>exit</button>
-
-  <canvas id="canvas" width="700" height="400" style="display: hidden"></canvas>
+    <div class='button_wrapper'>
+      <a href="/task/{{taskid}}/{{stepid}}">
+        <button type='button' class='capture_nav_item' id='confirm'></button>
+      </a>
+      <button type="button" class='capture_nav_item' id='reload'></button>
+      <button type="button" class='capture_nav_item' id='exit'></button>
+    </div>
+  
 
   </div>	<!-- end capture -->
-  
 </div>  <!-- end video wrapper -->
+<div class="button_wrapper">
+  <button type="button" id='snap'></button>
+  <a href="/task/{{taskid}}"><button type="button" id="exit"></button></a>
+</div>
 
-<button type="button" id='snap'>take photo</button>
 
 

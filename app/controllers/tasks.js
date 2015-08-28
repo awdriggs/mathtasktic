@@ -72,8 +72,10 @@ module.exports.controller = function(app, passport) {
         //find one where the task id matches the id passed into the url
 
         Task.findById(req.params.id).exec(function(err, task) {
+
             res.render('singleTask', {
-                data: task
+                data: task,
+                user: req.user
             });
         });
     })
@@ -122,13 +124,42 @@ module.exports.controller = function(app, passport) {
                         res.json(item) // temp, need to send student to the actual solution...
                     })
                 })
-            })  
-        })    
+            })
+        })
     })
-    
+
 
     app.get('/task/:id/:step', function(req, res) {
-        res.send('answer')
+        //find this task and grab the step data
+        var currentId = req.params.id;
+        console.log(currentId);
+        //return the problem description and test description
+        Task.findOne({ _id: currentId }).exec(function(err, task) {
+            // console.log(err)
+            // if (!err) {
+            //     //step = task.steps.id(req.params.step)
+
+            //     res.render('answer', {
+            //         task: task,
+            //         //step: step,
+            //         user: req.user
+            //     });
+            // }
+
+            step = task.steps.id(req.params.step)
+            
+            res.render('answer', {
+                    task: task,
+                    step: step,
+                    user: req.user
+                });
+            
+
+        });
+        //return a picture of the step answer
+
+        //show a confirm and exit button on the next page
+        // res.send('error?')
     });
 
     //aws tester
