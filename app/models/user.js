@@ -10,6 +10,9 @@ var userSchema = mongoose.Schema({
         email: String,
         username: String,
         password: String,
+        first: String,
+        last: String,
+        //later add a teacher slug
     }
 
 });

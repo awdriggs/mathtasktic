@@ -21,6 +21,8 @@ var signup = function(){
 	
 	//build the rest of the signup form
 	var username = $('<div>').attr('class', 'form-group').attr('class', 'signup_input');
+	username.append($('<input>').attr('type', 'text').attr('class', 'form-control').attr('name', 'first').attr('placeholder', 'first name'))
+	username.append($('<input>').attr('type', 'text').attr('class', 'form-control').attr('name', 'last').attr('placeholder', 'last name'))
 	username.append($('<input>').attr('type', 'email').attr('class', 'form-control').attr('name', 'email').attr('placeholder', 'email'))
 	username.insertBefore($('#login'))
 }

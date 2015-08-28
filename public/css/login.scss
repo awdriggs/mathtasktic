@@ -1,0 +1,36 @@
+@import 'imports';
+
+#logo{
+	width: 500px;
+	margin: 0 auto;
+	padding-top: 10rem;
+}
+
+#login_wrapper{
+
+    width: 300px;
+    margin: 1rem auto;
+   
+    input{
+        font-family: $quicksand;
+        display: block;
+        width: 98%;
+        height: 40px;
+        margin: 1rem auto;
+        font-size: 1.25rem;
+        text-align: center;
+        color: $purple;
+
+    }
+
+   .button-group{
+        button{
+            @include btn;
+            width: 48%;
+        }
+
+       #login, #create{
+            margin-right: 2%;
+        }
+   }
+}

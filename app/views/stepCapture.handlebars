@@ -1,27 +1,33 @@
-Add Steps
+
 <div id="video_wrapper">
 
   <div id="feed">
+    <h2 id='directions'>add a step</h2>
    <img src="/mask.png">
    <video id="player" autoplay="true"></video>
   </div> <!-- end feed -->
 
   <div id="capture">
-  
+    <canvas id="canvas" width="700" height="400" style="display: hidden"></canvas>
  
-    <input name="direction" id="direction" placeholder="add a direction">
-    <textarea name="image" id="image" style="display: none;"></textarea>
-    <button type='submit' class='capture_nav_item' id='confirm'>confirm</button>
-    <button type="button" class='capture_nav_item' id='reload'>reload</button>
-    <button type="button" class='capture_nav_item' id='exit'>exit</button>
- 
+    
+    <div id="form_wrapper">
+      <input name="direction" id="direction" placeholder="add a direction">
+      <textarea name="image" id="image" style="display: none;"></textarea>
 
-  <canvas id="canvas" width="700" height="400" style="display: hidden"></canvas>
+      <div class='button_wrapper'>
+        <button type='submit' class='capture_nav_item' id='confirm'></button>
+        <button type="button" class='capture_nav_item' id='reload'></button>
+        <a href="/"><button type="button" class='capture_nav_item' id='exit'></button></a>
+      </div>
+    </div>
+
+  
 
   </div>	<!-- end capture -->
-  end of wrapper
 </div>  <!-- end video wrapper -->
-
-<button type="button" id='snap'>take photo</button>
-
+<div class="button_wrapper">
+  <button type="button" id='snap'></button>
+  <a href="/task/{{id}}"><button type="button" id="next"></button></a>
+</div>
 

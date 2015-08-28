@@ -10,7 +10,9 @@ module.exports.controller = function(app, passport) {
     app.get('/teacher/create', function(req, res) {
 
         // render the page and pass in any flash data if it exists
-        res.render('makeTask');
+        res.render('makeTask', {
+            user: req.user
+        });
     });
 
     app.post('/teacher/create', function(req, res) {
@@ -26,7 +28,8 @@ module.exports.controller = function(app, passport) {
         //get the task from the db, do you even need to do this?
         res.render('stepCapture', {
             title: 'Step',
-            layout: 'step'
+            layout: 'step',
+            id: req.params.id
         });
     });
 

@@ -1,3 +1,31 @@
+@import url(https://fonts.googleapis.com/css?family=Megrim|Quicksand:400,700,300);
+#logo {
+  width: 500px;
+  margin: 0 auto;
+  padding-top: 10rem; }
 
+#login_wrapper {
+  width: 300px;
+  margin: 1rem auto; }
+  #login_wrapper input {
+    font-family: "Quicksand", sans-serif;
+    display: block;
+    width: 98%;
+    height: 40px;
+    margin: 1rem auto;
+    font-size: 1.25rem;
+    text-align: center;
+    color: #2E296C; }
+  #login_wrapper .button-group button {
+    color: white;
+    font-family: "Megrim", sans-serif;
+    font-size: 1.5rem;
+    display: inline-block;
+    background-color: #2E296C;
+    border: solid white 2px;
+    height: 59px;
+    width: 48%; }
+  #login_wrapper .button-group #login, #login_wrapper .button-group #create {
+    margin-right: 2%; }
 
 /*# sourceMappingURL=login.css.map */

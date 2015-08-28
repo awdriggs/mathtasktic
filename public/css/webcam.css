@@ -1,0 +1,39 @@
+@import url(https://fonts.googleapis.com/css?family=Megrim|Quicksand:400,700,300);
+body {
+  margin: 0px;
+  padding: 0px; }
+
+#video_wrapper {
+  width: 1280px;
+  height: 720px;
+  overflow: hidden;
+  margin: 1rem auto; }
+  #video_wrapper #directions {
+    position: absolute;
+    margin: 10rem 32rem; }
+
+img {
+  position: absolute;
+  z-index: 100;
+  max-width: 100%;
+  height: auto; }
+
+#player {
+  width: 100%;
+  height: 100%;
+  z-index: -100; }
+
+button {
+  color: white;
+  font-family: "Megrim", sans-serif;
+  font-size: 1.5rem;
+  display: inline-block;
+  background-color: #2E296C;
+  border: solid white 2px;
+  height: 59px; }
+
+#canvas {
+  display: inherit;
+  margin: 0 auto; }
+
+/*# sourceMappingURL=webcam.css.map */

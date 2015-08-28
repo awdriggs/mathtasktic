@@ -1,11 +1,19 @@
-{{user.local.username}} this the tasks index in handlebars
-<br>
-{{#each data}}
-	<div class="task_list">
-		{{title}}
-		<a href="/task/{{_id}}">solve</a>
-	</div>
+<div id="wrapper">
 	
-{{/each}}
-<a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+	<div id="top-nav">
+		<h2>{{user.local.username}}</h2>
+		<h3><a href="/logout" class="btn btn-default btn-sm">Logout</a></h3>
+		<div id="logo"><img src="../images/logo.png"></div>
+	</div>{{!-- end top nav --}}
+	
+	<br>
+	{{#each data}}
+		<div class="task_list">
+			{{title}}
+			<a href="/task/{{_id}}">solve</a>
+		</div>
+		
+	{{/each}}
+
+	    </div>
+</div>

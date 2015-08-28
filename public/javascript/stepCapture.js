@@ -36,6 +36,7 @@ $(window).load(function() {
 
     $('#canvas').hide(); //hide the canvas to start
     $('#capture').hide();
+    $('#next').hide(); //hide the next button so at least one image is added
 });
 
 // cofirm capture
@@ -58,6 +59,12 @@ var confirm = function() {
     {
           //right now this is just html data, we can do something else later
           console.log(data);
+          //push the data to a message...
+
+        $('#directions').text('step added!');
+        reload();
+
+
     });   
 }
 
@@ -65,6 +72,8 @@ var confirm = function() {
 var reload = function() {
     console.log('reload viewer');
     //hide the canvas, show the feed
+    $('#snap').show();
+    $('#next').show();
     $('#feed').show();
     $('#canvas').hide();
     $('#capture_nav').hide();
@@ -72,7 +81,7 @@ var reload = function() {
 
 var exit = function() {
     console.log('exit viewer');
-    parent.history.back();
+    // parent.history.back();
 }
 
 //capture portion of the current webcam image.
@@ -87,6 +96,8 @@ var snap = function() {
     console.log('snap')
 
     $('#feed').hide();
+    $('#snap').hide();
+    $('#next').hide();
     $('#canvas').show();
     $('#capture').show();
     context.drawImage(player, 150, 150, 350, 200, 0, 0, 700, 400);

@@ -1,0 +1,50 @@
+@import url(https://fonts.googleapis.com/css?family=Megrim|Quicksand:400,700,300);
+body {
+  background-color: #2E296C;
+  color: white;
+  font-family: "Quicksand", sans-serif; }
+
+#wrapper {
+  /*min-width: 400px;*/
+  width: 1280px;
+  margin: 1rem auto;
+  background-color: grey;
+  /*height: 720px;*/
+  /*overflow: hidden; removes the bottom portion of the video stream*/ }
+
+a, a:visited {
+  text-decoration: none;
+  color: white; }
+
+a:hover {
+  color: #6864FF; }
+
+h1, h2, h3 {
+  font-family: "Megrim", sans-serif; }
+
+h2 {
+  font-size: 3rem; }
+
+#confirm, #reload, #exit, #next, #snap {
+  width: 59px;
+  height: 59px;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px; }
+
+#confirm {
+  background: url("../images/confirm.png"); }
+
+#reload {
+  background: url("../images/redo.png"); }
+
+#exit {
+  background: url("../images/cancel.png"); }
+
+#next {
+  background: url("../images/next.png"); }
+
+#snap {
+  background: url("../images/record.png"); }
+
+/*# sourceMappingURL=global.css.map */
