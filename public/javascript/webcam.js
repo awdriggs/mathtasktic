@@ -1,7 +1,7 @@
 $(window).load(function() {
     //dedictated button events
     console.log('webcam js loaded');
-    
+     $('#video_wrapper').on('click', '#confirm', confirm);
     $('#video_wrapper').on('click', '#reload', reload);
     $('#video_wrapper').on('click', '#exit', exit);
 
@@ -39,26 +39,23 @@ $(window).load(function() {
 });
 
 //cofirm capture
-// switched from ajax to form submission
-//save photo and send to server? need to figure this out for sure...
-// var confirm = function() {
-//     console.log('confirm capture');
-//     var canvas = document.getElementById("canvas");
-//     var captured = canvas.toDataURL();
-//     var pathname = window.location.pathname;
+var confirm = function() {
+    console.log('confirm capture');
+    var canvas = document.getElementById("canvas");
+    var captured = canvas.toDataURL();
+    var pathname = window.location.pathname;
 
-//     var postData = {
-//         user: 'fake_username',
-//         image: captured
-//     }
+    var postData = {
+        image: captured
+    }
     
-//     $.post(pathname, postData,
-//     function(data)
-//     {
-//           //right now this is just html data, we can do something else later
-//           console.log(data);
-//     });   
-// }
+    $.post(pathname, postData,
+    function(data)
+    {
+          //right now this is just html data, we can do something else later
+          console.log(data);
+    });   
+}
 
 //retake capture 
 var reload = function() {

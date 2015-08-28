@@ -1,11 +1,11 @@
-// app/models/user.js
+
 // load the things we need
 var mongoose = require('mongoose');
 
 //define the schema for the response schema, it is a sub-dcoument of task
 var responseSchema = mongoose.Schema({
 	student: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //make this a ref?
-	image: String, //this should be a url
+	imageURL: String, //this should be a url
 	feedback: String,
 	timestamp: { type: Date, default: Date.now }
 })

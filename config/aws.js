@@ -40,17 +40,57 @@ module.exports = {
             special: false
         });
 
-        var url='https://s3.amazonaws.com/mathtasktic/'+ taskID + '/' + slug;
+        var file = slug + '.png'
+        
+
+        var url='https://s3.amazonaws.com/mathtasktic/'+ taskID + '/' + file;
 
         var params = {
             Bucket: bucketFolder,
-            Key: slug+'.png',
+            Key: file,
             Body: buffer,
             ContentEncoding: 'base64',
             ContentType: 'image/png'
         };
 
         s3.putObject(params, function(err, data) {
+            if (err) {
+                console.log(err)
+                cb(false)
+            } else {
+                console.log("save successful")
+                console.log(data)
+                cb(url)
+            }
+        });
+    },
+
+    addResponseImage: function(taskID, stepID, buffer, cb){
+        var s3 = new AWS.S3();
+        bucketFolder = 'mathtasktic/'+ taskID + '/' + stepID;
+
+        //console.log(buffer);
+
+        var slug = randomString({
+            length: 3,
+            numeric: true,
+            letters: true,
+            special: false
+        });
+        
+        var file = slug + '.png'
+        var url='https://s3.amazonaws.com/mathtasktic/'+ taskID + '/'  + stepID + '/' + file;
+
+
+        var params = {
+            Bucket: bucketFolder,
+            Key: file,
+            Body: buffer,
+            ContentEncoding: 'base64',
+            ContentType: 'image/png'
+        };
+
+         s3.putObject(params, function(err, data) {
             if (err) {
                 console.log(err)
                 cb(false)

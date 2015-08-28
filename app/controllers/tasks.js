@@ -91,57 +91,48 @@ module.exports.controller = function(app, passport) {
     //pass step number too?
     app.post('/submit/:id/:step', function(req, res) {
 
-        //I think all of this needs to happen after the save!
-        //because i want to include the user id into the feedback.
-        //get the task with the object id of object id
-        var current = Task.findById(req.params.id).exec(function(err, task) {
+        var dataUrl = req.body.image
+        var dataString = dataUrl.split(",")[1];
+        var buffer = new Buffer(dataString, 'base64');
+        var extension = dataUrl.match(/\/(.*)\;/)[1];
 
-            var step = task.steps.id(req.params.step); //this grabs the correct step that I want!
+        var user = req.user._id;
+        var id = req.params.id;
+        var step = req.params.step;
 
+        //send the image to s3
+        s3.addResponseImage(id, step, buffer, function(url) {
+            //after save, find the current task
+            var current = Task.findById(req.params.id).exec(function(err, task) {
 
-            //push the student userid to the object
-            step.responses.push({
-                student: req.user._id //this will be the current user.
-            })
+                var step = task.steps.id(req.params.step); //this grabs the correct step that I want!
 
-
-            //populate the student's info into the document
-
-            task.save(function(err, task) {
-                Task.findOne(task).populate('steps.responses.student').exec(function(err, item) {
-                    res.json(item) // temp, need to send student to the actual solution...
+                //push the student userid to the object
+                step.responses.push({
+                    student: req.user._id, //this will be the current user.
+                    imageURL: url
                 })
-            })
 
-        })
-
-        //next steps, figure out how to save to the a cloud storage and get the images back out...
-        //figure out how to build the next student action, seeing the actual answer and getting to set get or not get
-
-
-
-
-        // //saving bs
-        // var dataUrl = req.body.image
-        // var dataString = dataUrl.split(",")[1];
-        // var buffer = new Buffer(dataString, 'base64');
-        // var extension = dataUrl.match(/\/(.*)\;/)[1];
-
-        // var fullFileName = 'testing' + "." + extension;
-
-        // console.log(buffer);
-        // //fs.writeFileSync(fullFileName, buffer, "binary");
-        // //write to s3
-
-        // res.redirect('/');
-        //res.send('post submit hit')
+                //populate the student's info into the document
+                task.save(function(err, task) {
+                    Task.findOne(task).populate('steps.responses.student').exec(function(err, item) {
+                        res.json(item) // temp, need to send student to the actual solution...
+                    })
+                })
+            })  
+        })    
     })
+    
 
+    app.get('/task/:id/:step', function(req, res) {
+        res.send('answer')
+    });
+
+    //aws tester
     app.get('/awstest', function(req, res) {
         s3.test('to whom?', function(m) {
             res.send(m)
         })
-
     })
 
 }
