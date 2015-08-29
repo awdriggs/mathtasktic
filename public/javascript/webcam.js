@@ -43,17 +43,21 @@ var confirm = function() {
     console.log('confirm capture');
     var canvas = document.getElementById("canvas");
     var captured = canvas.toDataURL();
-    var pathname = window.location.pathname;
+    var path = window.location.pathname;
+    
+    var pathArray = path.split("/")
+    var newPath = '/task/' + pathArray[2] + '/' + pathArray[3];
 
     var postData = {
         image: captured
     }
     
-    $.post(pathname, postData,
+    $.post(path, postData,
     function(data)
     {
           //right now this is just html data, we can do something else later
-          console.log(data);
+          //console.log(data);
+          window.location = newPath;
     });   
 }
 

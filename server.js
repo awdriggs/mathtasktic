@@ -14,6 +14,7 @@ var configDB      = require('./config/database.js');
 var path = require('path');
 var exphbs = require('express-handlebars');
 
+app.use(logger('dev'));
 
 app.engine('handlebars', exphbs({
     defaultLayout: 'main',

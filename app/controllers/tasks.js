@@ -50,18 +50,24 @@ module.exports.controller = function(app, passport) {
                 console.log('s3 write error')
             } else if (url) {
                 Task.findById(req.params.id).exec(function(err, task) {
-                    var currentStep = task.steps.push({
-                            direction: req.body.direction,
-                            imageURL: url
-                        }) //this is returning the index, not begining at 0, wierd?
+                    if (err) {
+                        res.send(err);
+                    } else {
+                        var currentStep = task.steps.push({
+                                direction: req.body.direction,
+                                imageURL: url
+                            }) //this is returning the index, not begining at 0, wierd?
 
-                    //save the image to s3
+                        //save the image to s3
 
-                    //on callback, save the img url to collection
-                    //then send back the json
-                    task.save(function(err, data) {
-                        res.json(data.steps[currentStep - 1]); //returning an object of whatever is in the current step!
-                    })
+                        //on callback, save the img url to collection
+                        //then send back the json
+                        task.save(function(err, data) {
+                            res.json(data.steps[currentStep - 1]); //returning an object of whatever is in the current step!
+                        })
+                    }
+
+
                 });
             }
         })
@@ -83,7 +89,7 @@ module.exports.controller = function(app, passport) {
     app.get('/submit/:id/:step', function(req, res) {
 
         //send the webcam template!
-        console.log(req.params.id);
+        console.log('tasks.js task id', req.params.id);
         res.render('webcam', {
             title: 'Webcam',
             layout: 'capture',
@@ -95,7 +101,7 @@ module.exports.controller = function(app, passport) {
 
     //pass step number too?
     app.post('/submit/:id/:step', function(req, res) {
-
+        console.log('submitting response')
         var dataUrl = req.body.image
         var dataString = dataUrl.split(",")[1];
         var buffer = new Buffer(dataString, 'base64');
@@ -103,6 +109,7 @@ module.exports.controller = function(app, passport) {
 
         var user = req.user._id;
         var id = req.params.id;
+        console.log('post id ' + id)
         var step = req.params.step;
 
         //send the image to s3
@@ -129,31 +136,38 @@ module.exports.controller = function(app, passport) {
     })
 
 
-    app.get('/task/:id/:step', function(req, res) {
+    app.get('/task/:task/:step', function(req, res) {
         //find this task and grab the step data
-        var currentId = req.params.id;
+        console.log('hitting get task/id/step')
+        var currentId = req.params.task;
         console.log(currentId);
+        console.log('get task by id and step controller, step id:', currentId);
         //return the problem description and test description
-        Task.findOne({ _id: currentId }).exec(function(err, task) {
-            // console.log(err)
-            // if (!err) {
-            //     //step = task.steps.id(req.params.step)
+        Task.findOne({
+            _id: currentId
+        }).exec(function(err, task) {
+            console.log(err)
+            if (!err) {
+                step = task.steps.id(req.params.step)
 
-            //     res.render('answer', {
-            //         task: task,
-            //         //step: step,
-            //         user: req.user
-            //     });
-            // }
-
-            step = task.steps.id(req.params.step)
-            
-            res.render('answer', {
+                res.render('answer', {
                     task: task,
                     step: step,
                     user: req.user
+
                 });
-            
+            } else {
+                res.send(err);
+            }
+
+            // step = task.steps.id(req.params.step)
+
+            // res.render('answer', {
+            //     task: task,
+            //     step: step,
+            //     user: req.user
+            // });
+
 
         });
         //return a picture of the step answer

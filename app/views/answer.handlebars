@@ -8,15 +8,17 @@
 	
 	<br>
 
+<div id="task_details">
+	<h3>Problem</h3>
+	<p>{{task.description}}<p>
+	<h3>Step Answer</h3>
+	<img src="{{step.imageURL}}">
+	<p>{{step.direction}}<p>
+	
 
-<h3>Problem</h3>
-<p>{{task.description}}<p>
-<h3>Step Answer</h3>
-<p>{{step.direction}}<p>
-<img src="{{step.imageURL}}">
-
-<div id="button_wrapper">
-	<a href="/task/{{task._id}}"><button type="button" id="next"></button></a>
+	<div id="button_wrapper">
+		<a href="/task/{{task._id}}"><button type="button" id="confirm"></button></a>
+	</div>
 </div>
 
 </div>

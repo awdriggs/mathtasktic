@@ -80,7 +80,7 @@ module.exports = {
         
         var file = slug + '.png'
         var url='https://s3.amazonaws.com/mathtasktic/'+ taskID + '/'  + stepID + '/' + file;
-
+        console.log('aws.js ', url);
 
         var params = {
             Bucket: bucketFolder,
@@ -97,7 +97,7 @@ module.exports = {
             } else {
                 console.log("save successful")
                 console.log(data)
-                cb(url)
+                cb(url) //is this the culprit?
             }
         });
     }
