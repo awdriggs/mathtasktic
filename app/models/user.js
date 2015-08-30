@@ -12,7 +12,8 @@ var userSchema = mongoose.Schema({
         password: String,
         first: String,
         last: String,
-        userType: String
+        userType: String,
+        teacherId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'} //the id of a teacher, will but null if the user is a teacher, this ok?
         //later add a teacher slug
     },
 

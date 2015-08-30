@@ -9,11 +9,11 @@ var User = require('../app/models/user');
 // expose this function to our app using module.exports
 module.exports = function(passport) {
 
-// =========================================================================
-// passport session setup ==================================================
-// =========================================================================
-// required for persistent login sessions
-// passport needs ability to serialize and unserialize users out of session
+    // =========================================================================
+    // passport session setup ==================================================
+    // =========================================================================
+    // required for persistent login sessions
+    // passport needs ability to serialize and unserialize users out of session
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
@@ -27,9 +27,9 @@ module.exports = function(passport) {
         });
     });
 
-// =========================================================================
-// LOCAL SIGNUP ============================================================
-// =========================================================================
+    // =========================================================================
+    // LOCAL SIGNUP ============================================================
+    // =========================================================================
 
     passport.use('local-signup', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with username
@@ -61,21 +61,36 @@ module.exports = function(passport) {
                         // create the user
                         var newUser = new User();
 
-                        // set the user's local credentials
-                        newUser.local.username = username;
-                        newUser.local.password = newUser.generateHash(password);
-                        newUser.local.email = req.body.email;
-                        newUser.local.first = req.body.first;
-                        newUser.local.last = req.body.last;
-                        //newUser.local.classCode = req.body.classCode;
-                        newUser.local.userType = req.body.userType;
+                        //find the teacher by the username of the input
 
-                        // save the user
-                        newUser.save(function(err) {
-                            if (err)
-                                throw err;
-                            return done(null, newUser);
-                        });
+                        User.findOne({
+                            'local.username': req.body.teacherId
+                        }, function(err, teacher) {
+                            if (!teacher || teacher.local.userType == 'student') { //send flash if teacher doesn't exist or the user type selected isn't a techer...
+                                return done(null, false, req.flash('message', 'No teacher with that username.'));
+                            } else {
+                                // set the user's local credentials
+                                newUser.local.username = username;
+                                newUser.local.password = newUser.generateHash(password);
+                                newUser.local.email = req.body.email;
+                                newUser.local.first = req.body.first;
+                                newUser.local.last = req.body.last;
+                                //newUser.local.classCode = req.body.classCode;
+                                newUser.local.userType = req.body.userType;
+                                newUser.local.teacherId = teacher._id
+                                
+                                // save the user
+                                newUser.save(function(err) {
+                                    if (err)
+                                        throw err;
+                                    return done(null, newUser);
+                                });
+
+                            }
+
+                        })
+
+
                     }
 
                 });
@@ -83,9 +98,9 @@ module.exports = function(passport) {
             });
         }));
 
-// =========================================================================
-// LOCAL LOGIN =============================================================
-// =========================================================================
+    // =========================================================================
+    // LOCAL LOGIN =============================================================
+    // =========================================================================
     passport.use('local-login', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with username
             usernameField: 'username',

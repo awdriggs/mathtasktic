@@ -1,0 +1,24 @@
+<div id="wrapper">
+	
+	<div id="top-nav">
+		<h2>{{user.local.username}}</h2>
+		<h3><a href="/logout" class="btn btn-default btn-sm">Logout</a></h3>
+		<div id="logo"></div>
+	</div>{{!-- end top nav --}}
+	
+	<br>
+	<button>tasks</button>
+	<button>students</button>
+	{{#each data}}
+	<a href="/task/{{_id}}">
+		<div class="task_list">
+			<p>{{dateformat}}</p>
+			<p class="title"> {{title}}</p>
+			<p>{{steps.length}} steps</p>
+		</div>
+	</a>
+		
+	{{/each}}
+
+	    </div>
+</div>
