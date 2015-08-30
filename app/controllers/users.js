@@ -8,7 +8,9 @@
         app.get('/', isLoggedIn, function(req, res) {
             //teacher
             //find all the tasks where I'm the owner
-            
+
+
+
             //student
             //find all the task where my teacher is the owner
 
@@ -24,7 +26,7 @@
 
                 console.log(req.user);
                 if (req.user.local.userType === 'teacher') {
-                    res.render('teacher')
+                    res.send(tasks)
                 } else {
                     res.render('tasks', {
                         user: req.user,
