@@ -185,14 +185,7 @@ module.exports.controller = function(app, passport) {
         var search = Task.findById(req.params.task);
 
 
-        // Task.findById(req.params.task).populate('steps.responses.student').exec(function(err, tasks) {
-
-        //     res.send(tasks);
-        search.sort({
-            'steps.direction': -1
-        })
-
-        // });
+        
         search.populate('steps.responses.student')
 
 
@@ -207,7 +200,10 @@ module.exports.controller = function(app, passport) {
        //var query = Person.find({ age : { $lt : 1000 }});
        //search.sort({timestamp: -1}) //this works!
        //search.where('steps.responses.student').exists()//this works, doesn't show taks with no responses
-       search.where('steps.responses.student').exists(false)//this works, show tasks with 0 responses
+       //search.where('steps.responses.student').exists(false)//this works, show tasks with 0 responses
+        
+    
+
         search.exec(function(err, tasks){
             if(err){
                 res.send(err)
