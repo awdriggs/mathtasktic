@@ -97,4 +97,10 @@
     height: 59px;
     float: right; }
 
+#logo {
+  background-image: url("/images/logo.png");
+  display: block;
+  width: 488px;
+  height: 86px; }
+
 /*# sourceMappingURL=main.css.map */

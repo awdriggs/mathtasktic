@@ -13,6 +13,11 @@ var userSchema = mongoose.Schema({
         first: String,
         last: String,
         //later add a teacher slug
+    },
+
+    feedback: {
+        timestamp: { type: Date, default: Date.now },
+        comment: String
     }
 
 });

@@ -176,11 +176,45 @@ module.exports.controller = function(app, passport) {
         // res.send('error?')
     });
 
-    //aws tester
-    app.get('/awstest', function(req, res) {
-        s3.test('to whom?', function(m) {
-            res.send(m)
-        })
-    })
 
+
+    //subdoc search tester
+
+    app.get('/teacher/:task', function(req, res) {
+
+        var search = Task.findById(req.params.task);
+
+
+        // Task.findById(req.params.task).populate('steps.responses.student').exec(function(err, tasks) {
+
+        //     res.send(tasks);
+        search.sort({
+            'steps.direction': -1
+        })
+
+        // });
+        search.populate('steps.responses.student')
+
+
+        search.exec(function(err, result) {
+            res.send(result);
+        })
+    });
+
+    app.get('/test', function(req, res){
+        
+        var search = Task.find()
+       //var query = Person.find({ age : { $lt : 1000 }});
+       //search.sort({timestamp: -1}) //this works!
+       //search.where('steps.responses.student').exists()//this works, doesn't show taks with no responses
+       search.where('steps.responses.student').exists(false)//this works, show tasks with 0 responses
+        search.exec(function(err, tasks){
+            if(err){
+                res.send(err)
+            }
+
+            res.json(tasks)
+        })
+       
+    })
 }
