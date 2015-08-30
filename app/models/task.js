@@ -26,7 +26,8 @@ var taskSchema = mongoose.Schema({
 	steps: [stepSchema],
 	// responses: [responseSchema],
 	solution: String, //this should be an url
-	active: { type: Boolean, default: false }
+	active: { type: Boolean, default: false },
+	author: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 // create the model for users and expose it to our app

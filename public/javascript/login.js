@@ -24,6 +24,7 @@ var signup = function(){
 	username.append($('<input>').attr('type', 'text').attr('class', 'form-control').attr('name', 'first').attr('placeholder', 'first name'))
 	username.append($('<input>').attr('type', 'text').attr('class', 'form-control').attr('name', 'last').attr('placeholder', 'last name'))
 	username.append($('<input>').attr('type', 'email').attr('class', 'form-control').attr('name', 'email').attr('placeholder', 'email'))
+	// username.append($('<input>').attr('type', 'text').attr('class', 'form-control').attr('name', 'userType').attr('type', 'hidden').val('student'))
 	username.insertBefore($('#login'))
 }
 

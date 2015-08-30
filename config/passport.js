@@ -56,7 +56,7 @@ module.exports = function(passport) {
                     if (user) {
                         return done(null, false, req.flash('message', 'That username is already taken.'));
                     } else {
-
+                        console.log(req.body);
                         // if there is no user with that username
                         // create the user
                         var newUser = new User();
@@ -65,6 +65,10 @@ module.exports = function(passport) {
                         newUser.local.username = username;
                         newUser.local.password = newUser.generateHash(password);
                         newUser.local.email = req.body.email;
+                        newUser.local.first = req.body.first;
+                        newUser.local.last = req.body.last;
+                        //newUser.local.classCode = req.body.classCode;
+                        newUser.local.userType = req.body.userType;
 
                         // save the user
                         newUser.save(function(err) {

@@ -148,7 +148,7 @@ module.exports.controller = function(app, passport) {
         }).exec(function(err, task) {
             console.log(err)
             if (!err) {
-                step = task.steps.id(req.params.step)
+                step = task.steps.id(req.params.step) //graps the task we are looking at. 
 
                 res.render('answer', {
                     task: task,
@@ -158,41 +158,27 @@ module.exports.controller = function(app, passport) {
                 });
             } else {
                 res.send(err);
-            }
-
-            // step = task.steps.id(req.params.step)
-
-            // res.render('answer', {
-            //     task: task,
-            //     step: step,
-            //     user: req.user
-            // });
-
-
+            } //you should handle this better
         });
-        //return a picture of the step answer
-
-        //show a confirm and exit button on the next page
-        // res.send('error?')
     });
 
 
 
     //subdoc search tester
 
-    app.get('/teacher/:task', function(req, res) {
+    // app.get('/teacher/:task', function(req, res) {
 
-        var search = Task.findById(req.params.task);
+    //     var search = Task.findById(req.params.task);
 
 
         
-        search.populate('steps.responses.student')
+    //     search.populate('steps.responses.student')
 
 
-        search.exec(function(err, result) {
-            res.send(result);
-        })
-    });
+    //     search.exec(function(err, result) {
+    //         res.send(result);
+    //     })
+    // });
 
     app.get('/test', function(req, res){
         
@@ -202,8 +188,6 @@ module.exports.controller = function(app, passport) {
        //search.where('steps.responses.student').exists()//this works, doesn't show taks with no responses
        //search.where('steps.responses.student').exists(false)//this works, show tasks with 0 responses
         
-    
-
         search.exec(function(err, tasks){
             if(err){
                 res.send(err)
