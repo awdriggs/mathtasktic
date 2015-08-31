@@ -28,6 +28,12 @@ $quicksand: 'Quicksand', sans-serif;
    
 }
 
+@mixin hover {
+        color: $purple;
+        background-color: $periwinkle;
+        border: solid $periwinkle 2px;
+}
+
 @mixin inpt {
         font-family: $quicksand;
         display: block;

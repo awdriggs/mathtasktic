@@ -29,6 +29,10 @@
             width: 48%;
         }
 
+        button:hover{
+            @include hover;
+        }
+
        #login, #create{
             margin-right: 2%;
         }

@@ -1,6 +1,11 @@
 @import 'imports';
 
-
+#logo{
+    background-image: url('/images/logo.png');
+       display: block;
+    width: 488px;
+    height: 86px;
+}
 
 #logo{
     float: right;
@@ -48,6 +53,10 @@
             @include btn;
             margin: 0 auto;
         }   
+
+        button:hover{
+           @include hover;
+        }
 }
 
 .task_list{
@@ -117,10 +126,40 @@
     }
 }
 
-#logo{
-    background-image: url('/images/logo.png');
-       display: block;
-    width: 488px;
-    height: 86px;
+#teacher_nav{
+    width: 600px;
+    text-align: left;
+    button{
+        text-align: center;
+        width: 49%;
+        margin:0;
+    }
 }
+
+#student_list{
+    width: 600px;
+    margin: 0 auto;
+      margin: 1rem auto;
+    height: 50px;
+    
+
+   .student{
+        text-align: center;
+        color: white;
+        border: solid white 1px;
+        width: 100%;
+        font-size: 1.5rem;
+        &:hover{
+            background-color: $seaFoam;
+            color: $purple;
+            border: solid $seaFoam 1px;
+        }
+    } 
+
+}
+
+
+
+
+
 

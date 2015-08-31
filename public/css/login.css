@@ -25,6 +25,10 @@
     border: solid white 2px;
     height: 59px;
     width: 48%; }
+  #login_wrapper .button-group button:hover {
+    color: #2E296C;
+    background-color: #6864FF;
+    border: solid #6864FF 2px; }
   #login_wrapper .button-group #login, #login_wrapper .button-group #create {
     margin-right: 2%; }
 

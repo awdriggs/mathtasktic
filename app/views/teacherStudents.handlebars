@@ -12,16 +12,15 @@
 		<a href="/teacher/students"><button>students</button></a>
 	</div>
 	
-	{{#each data}}
-	<a href="/teacher/view/{{_id}}">
-		<div class="task_list">
-			<p>{{dateformat}}</p>
-			<p class="title"> {{title}}</p>
-			<p>{{steps.length}} steps</p>
+		<div id="student_list">
+			{{#each data}}
+			{{!-- <a href="/task/{{_id}}"> --}}
+				<div class="student">
+					<p>{{local.first}} {{local.last}}</p>
+				</div>
+			{{!-- </a> --}}
+				
+			{{/each}}
 		</div>
-	</a>
-		
-	{{/each}}
-
 	</div>
 </div>

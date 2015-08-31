@@ -2,13 +2,13 @@
 //still using the same task model as the student.
 
 var Task = require('../models/task');
-// var User = require('../models/user');
+var User = require('../models/user');
 
 var s3 = require('../../config/aws.js');
 
 module.exports.controller = function(app, passport) {
 
-	// CREATE A TASK ////////
+    // CREATE A TASK ////////
     // future, this needs to be locked down to only teachers
     app.get('/teacher/create', function(req, res) {
 
@@ -75,4 +75,20 @@ module.exports.controller = function(app, passport) {
             }
         })
     });
+
+    app.get('/teacher/students', function(req, res) {
+        User.find({
+            'local.teacherId': req.user._id
+        }).exec(function(err, students) {
+            res.render('teacherStudents', {
+                title: 'Students',
+                data: students
+            });
+        })
+    });
+
+    app.get('/teacher/view/:id', function(req, res){
+    	//get all the data for a task...
+    	res.send('view a task')
+    })
 }
