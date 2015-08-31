@@ -1,7 +1,7 @@
 
 module.exports = {
 
-    //'url' : 'your-settings-here' // looks like mongodb://<user>:<pass>@mongo.onmodulus.net:27017/Mikha4ot
-   'url' : 'mongodb://localhost/mathtasktic'
-
+   
+   //'url' : 'mongodb://localhost/mathtasktic'
+   'url' : process.env.MONGOLAB_URI
 };

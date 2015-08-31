@@ -26,7 +26,11 @@ app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/app/views');
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+// mongoose.connect(configDB.url); // connect to our database
+mongoose.connect(process.env.MONGOLAB_URI, function (error) {
+    if (error) console.error(error);
+    else console.log('mongo connected');
+});
 
 require('./config/passport')(passport); // pass passport for configuration
 
