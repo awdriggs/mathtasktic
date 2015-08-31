@@ -1,0 +1,48 @@
+<div id="wrapper">
+
+	<div id="top-nav">
+		<h2>{{user.local.username}}</h2>
+		<h3><a href="/logout" class="btn btn-default btn-sm">Logout</a></h3>
+		<div id="logo"></div>
+	</div>{{!-- end top nav --}}
+	
+	<br>
+
+	<div id="task_details">
+	<h2>{{data.title}}</h2>
+	<h3>Objective</h3>
+	<p>{{data.objective}}
+
+	<h3>Problem</h3>
+	<p>{{data.description}}
+	
+	{{#each data.steps}}
+	<h3 class="step">Step {{@index}}:{{direction}}</h3>
+		<div class='response_wrapper' style="display:none;">
+			{{#each responses}}
+				
+				<div class="student student_list">
+					<p>{{student.local.first}} {{student.local.last}}</p>
+				</div>
+
+				<div class="response" style="display:none;">
+					<div class="response_image">
+						<img src="{{imageURL}}">
+					</div>
+
+					<div class="form_wrapper" class="feedback">
+						<input type='hidden' value={{student._id}} name="studentId">
+						<textarea placeholder="feedback" name="feedback"></textarea>
+						<button type="button" class="confirm"></button>
+					</div>
+				</div>
+			{{/each}}
+			
+
+		{{/each}}
+	</div>{{!-- end response wrapper --}}
+	</div>
+
+</div>
+
+<script src='/javascript/results.js'></script>

@@ -31,7 +31,7 @@
 
 
 
-#form_wrapper{
+.form_wrapper{
     width: 600px;
     margin: 1rem auto;
     background-color: $purple;
@@ -83,6 +83,8 @@
             padding: 12px;
         margin: -0.1px;
     }
+
+
 }
 
 .task_list:hover{
@@ -104,6 +106,7 @@
     h2{
         border: solid white 2px;
         text-align: center;
+            line-height: 5rem;
     }
 
     h3{
@@ -113,16 +116,19 @@
     }
 
     p{  
-        margin-top: 0;
-        margin-bottom: 2rem;
+        margin-top: 0.5rem;
         display: inline-block;
         width: 80%
     }
 
     button{
         @include btn;
-        float: right;
+        
 
+    }
+
+    img{
+        width: 100%
     }
 }
 
@@ -136,14 +142,14 @@
     }
 }
 
-#student_list{
+.student_list{
     width: 600px;
-    margin: 0 auto;
-      margin: 1rem auto;
-    height: 50px;
+    margin: 1rem auto;
     
+    height: 50px;
+}
 
-   .student{
+ .student{
         text-align: center;
         color: white;
         border: solid white 1px;
@@ -154,9 +160,34 @@
             color: $purple;
             border: solid $seaFoam 1px;
         }
-    } 
+    }
+   
 
+.response_student{
+   text-align: center;
+   font-size: 2rem;
+   border: solid white 1px;
+        
+   p{
+        margin-top: 0.5rem;
+   }
 }
+
+.response{
+    width: 100%;
+    text-align: left;
+   .form_wrapper textarea{
+    height: 100px;
+    text-align: left;
+   }
+
+   .button_wrapper button{
+    width: 50px;
+
+   }
+}
+
+
 
 
 

@@ -87,8 +87,19 @@ module.exports.controller = function(app, passport) {
         })
     });
 
-    app.get('/teacher/view/:id', function(req, res){
-    	//get all the data for a task...
-    	res.send('view a task')
+    app.get('/teacher/view/:id', function(req, res) {
+        //get all the data for a task...
+        var current = Task.findById(req.params.id).populate('steps.responses.student').exec(function(err, task) {
+
+        	res.render('result', {
+                title: 'Results',
+                data: task
+
+            });
+
+            // res.send(task)
+        })
+
+        
     })
 }

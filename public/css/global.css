@@ -35,19 +35,19 @@ h3 {
   background-position: center;
   padding: 20px; }
 
-#confirm {
+.confirm {
   background: url("../images/confirm.png"); }
 
-#reload {
+.reload {
   background: url("../images/redo.png"); }
 
-#exit {
+.exit {
   background: url("../images/cancel.png"); }
 
-#next {
+.next {
   background: url("../images/next.png"); }
 
-#snap {
+.snap {
   background: url("../images/record.png"); }
 
 /*# sourceMappingURL=global.css.map */

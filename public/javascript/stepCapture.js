@@ -1,11 +1,11 @@
 $(window).load(function() {
     //dedictated button events
     console.log('webcam js loaded');
-    $('#video_wrapper').on('click', '#confirm', confirm);
-    $('#video_wrapper').on('click', '#reload', reload);
-    $('#video_wrapper').on('click', '#exit', exit);
+    $('#video_wrapper').on('click', '.confirm', confirm);
+    $('#video_wrapper').on('click', '.reload', reload);
+    $('#video_wrapper').on('click', '.exit', exit);
 
-    $('#snap').click(snap); //for taking the picture, turn to timer or opencv logic later
+    $('.snap').click(snap); //for taking the picture, turn to timer or opencv logic later
 
     $("player").click(function() {
         console.log()

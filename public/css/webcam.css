@@ -30,7 +30,8 @@ button {
   display: inline-block;
   background-color: #2E296C;
   border: solid white 2px;
-  height: 59px; }
+  height: 59px;
+  min-width: 59px; }
 
 #canvas {
   display: inherit;
