@@ -8,7 +8,6 @@ body {
   /*min-width: 400px;*/
   width: 1280px;
   margin: 1rem auto;
-  background-image: url("/images/background.jpg");
   min-height: 720px;
   /*overflow: hidden; removes the bottom portion of the video stream*/ }
 

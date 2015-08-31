@@ -4,6 +4,10 @@
   margin: 0 auto;
   padding-top: 10rem; }
 
+#wrapper {
+  background-image: url("/images/main.jpg");
+  background-repeat: no-repeat; }
+
 #login_wrapper {
   width: 300px;
   margin: 1rem auto; }

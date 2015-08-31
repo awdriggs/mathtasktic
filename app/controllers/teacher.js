@@ -93,7 +93,8 @@ module.exports.controller = function(app, passport) {
 
         	res.render('result', {
                 title: 'Results',
-                data: task
+                data: task,
+                user: req.user
 
             });
 
