@@ -36,7 +36,7 @@ $(window).load(function() {
 
     $('#canvas').hide(); //hide the canvas to start
     $('#capture').hide();
-    $('#next').hide(); //hide the next button so at least one image is added
+    $('.next').hide(); //hide the next button so at least one image is added
 });
 
 // cofirm capture
@@ -72,8 +72,8 @@ var confirm = function() {
 var reload = function() {
     console.log('reload viewer');
     //hide the canvas, show the feed
-    $('#snap').show();
-    $('#next').show();
+    $('.snap').show();
+    $('.next').show();
     $('#feed').show();
     $('#canvas').hide();
     $('#capture_nav').hide();
@@ -96,8 +96,8 @@ var snap = function() {
     console.log('snap')
 
     $('#feed').hide();
-    $('#snap').hide();
-    $('#next').hide();
+    $('.snap').hide();
+    $('.next').hide();
     $('#canvas').show();
     $('#capture').show();
     context.drawImage(player, 150, 150, 350, 200, 0, 0, 700, 400);

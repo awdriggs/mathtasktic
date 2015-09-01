@@ -72,6 +72,7 @@
         display: inline-block;
         margin-left: 1rem;
         margin-right: 1rem;
+
     }
 
     .title{
@@ -116,9 +117,9 @@
     }
 
     p{  
-        margin-top: 0.5rem;
+    
         display: inline-block;
-        width: 80%
+        
     }
 
     button{
@@ -187,6 +188,23 @@
    }
 }
 
+.newtask{
+    text-align: left;
+    width: 600px;
+    margin-top: 1rem;
+}
+
+.submit{
+    &:hover{
+        background-color: $periwinkle;
+        color: $purple;
+    }
+}
+
+#task_details .name{
+    margin-top:0.5rem;
+
+}
 
 
 

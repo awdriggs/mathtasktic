@@ -95,9 +95,7 @@
     padding-bottom: .5rem;
     margin: 0 0 1rem 0; }
   #task_details p {
-    margin-top: 0.5rem;
-    display: inline-block;
-    width: 80%; }
+    display: inline-block; }
   #task_details button {
     color: white;
     font-family: "Megrim", sans-serif;
@@ -149,5 +147,17 @@
     text-align: left; }
   .response .button_wrapper button {
     width: 50px; }
+
+.newtask {
+  text-align: left;
+  width: 600px;
+  margin-top: 1rem; }
+
+.submit:hover {
+  background-color: #6864FF;
+  color: #2E296C; }
+
+#task_details .name {
+  margin-top: 0.5rem; }
 
 /*# sourceMappingURL=main.css.map */

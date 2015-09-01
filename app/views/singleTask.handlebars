@@ -17,10 +17,15 @@
 	<p>{{data.description}}
 	
 	{{#each data.steps}}
-	<h3>Step {{@index}}:</h3>
-		<p>{{direction}}</p> <a href='/submit/{{../data._id}}/{{_id}}'><button class="next"></button></a>
-		
+	{{!-- <h3>Step {{@index}}:</h3><p>{{direction}}</p>
+		 <a href='/submit/{{../data._id}}/{{_id}}'><button class="next"></button></a>
+		 --}}
 
+		 <div class="task_list">
+			<p>Step {{@index}}</p>
+			<p class="title"> {{direction}}</p>
+			<a class="submit" href="/submit/{{../data._id}}/{{_id}}"><p>submit</p></a>
+		</div>
 	{{/each}}
 	</div>
 </div>

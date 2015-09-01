@@ -17,12 +17,12 @@
 	<p>{{data.description}}
 	
 	{{#each data.steps}}
-	<h3 class="step">Step {{@index}}:{{direction}}</h3>
+	<h3 class="step">Step {{@index}}: {{direction}}</h3>
 		<div class='response_wrapper' style="display:none;">
 			{{#each responses}}
 				
 				<div class="student student_list">
-					<p>{{student.local.first}} {{student.local.last}}</p>
+					<p class="name">{{student.local.first}} {{student.local.last}}</p>
 				</div>
 
 				<div class="response" style="display:none;">
@@ -38,9 +38,9 @@
 				</div>
 			{{/each}}
 			
-
+			</div>{{!-- end response wrapper --}}
 		{{/each}}
-	</div>{{!-- end response wrapper --}}
+	
 	</div>
 
 </div>

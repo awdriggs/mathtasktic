@@ -82,7 +82,8 @@ module.exports.controller = function(app, passport) {
         }).exec(function(err, students) {
             res.render('teacherStudents', {
                 title: 'Students',
-                data: students
+                data: students,
+                user: req.user
             });
         })
     });
